@@ -1,0 +1,501 @@
+id,client_id,platform,type,start_date
+CMP_0001,CL_029,Google,Поиск,2025-01-01
+CMP_0002,CL_066,Telegram,Telegram Ads,2025-01-01
+CMP_0003,CL_033,VK,Тизерная,2025-01-01
+CMP_0004,CL_051,VK,Таргетированная,2025-01-01
+CMP_0005,CL_008,VK,VK Клипы,2025-01-01
+CMP_0006,CL_078,Google,Сетевая,2025-01-01
+CMP_0007,CL_127,Yandex,Медийная,2025-01-01
+CMP_0008,CL_067,Google,Поиск,2025-01-01
+CMP_0009,CL_042,Yandex,Сетевая,2025-01-01
+CMP_0010,CL_012,Telegram,Telegram Ads,2025-01-01
+CMP_0011,CL_101,Google,Сетевая,2025-01-01
+CMP_0012,CL_027,Yandex,Сетевая,2025-01-01
+CMP_0013,CL_008,Google,YouTube Video,2025-01-01
+CMP_0014,CL_059,Telegram,Нативная,2025-01-01
+CMP_0015,CL_025,Google,YouTube Video,2025-01-01
+CMP_0016,CL_107,VK,VK Клипы,2025-01-01
+CMP_0017,CL_177,VK,Таргетированная,2025-01-01
+CMP_0018,CL_018,VK,Таргетированная,2025-01-01
+CMP_0019,CL_060,VK,Тизерная,2025-01-01
+CMP_0020,CL_123,VK,Тизерная,2025-01-01
+CMP_0021,CL_084,Google,YouTube Video,2025-01-01
+CMP_0022,CL_164,Yandex,Поиск,2025-01-01
+CMP_0023,CL_194,Google,YouTube Video,2025-01-01
+CMP_0024,CL_139,Yandex,Сетевая,2025-01-01
+CMP_0025,CL_054,Google,Сетевая,2025-01-01
+CMP_0026,CL_007,Yandex,Поиск,2025-01-01
+CMP_0027,CL_107,Telegram,Нативная,2025-01-01
+CMP_0028,CL_138,VK,Таргетированная,2025-01-01
+CMP_0029,CL_193,VK,VK Клипы,2025-01-01
+CMP_0030,CL_018,Telegram,Telegram Ads,2025-01-01
+CMP_0031,CL_078,Google,Сетевая,2025-01-01
+CMP_0032,CL_045,Telegram,Нативная,2025-01-01
+CMP_0033,CL_051,Google,Поиск,2025-01-01
+CMP_0034,CL_161,Google,Поиск,2025-01-01
+CMP_0035,CL_025,Telegram,Telegram Ads,2025-01-01
+CMP_0036,CL_139,Google,YouTube Video,2025-01-01
+CMP_0037,CL_147,VK,Таргетированная,2025-01-01
+CMP_0038,CL_164,Yandex,Сетевая,2025-01-01
+CMP_0039,CL_152,Yandex,Ретаргетинг,2025-01-01
+CMP_0040,CL_155,Google,Сетевая,2025-01-01
+CMP_0041,CL_083,VK,Таргетированная,2025-01-01
+CMP_0042,CL_088,Google,Сетевая,2025-01-01
+CMP_0043,CL_034,VK,VK Клипы,2025-01-01
+CMP_0044,CL_169,Yandex,Медийная,2025-01-01
+CMP_0045,CL_030,VK,VK Клипы,2025-01-01
+CMP_0046,CL_052,Yandex,Медийная,2025-01-01
+CMP_0047,CL_148,Telegram,Нативная,2025-01-01
+CMP_0048,CL_120,Google,Сетевая,2025-01-01
+CMP_0049,CL_183,VK,VK Клипы,2025-01-01
+CMP_0050,CL_027,Yandex,Ретаргетинг,2025-01-01
+CMP_0051,CL_153,VK,Таргетированная,2025-01-01
+CMP_0052,CL_059,Google,Сетевая,2025-01-01
+CMP_0053,CL_035,VK,VK Клипы,2025-01-01
+CMP_0054,CL_028,Yandex,Ретаргетинг,2025-01-01
+CMP_0055,CL_043,VK,VK Клипы,2025-01-01
+CMP_0056,CL_122,VK,Таргетированная,2025-01-01
+CMP_0057,CL_153,Google,Сетевая,2025-01-01
+CMP_0058,CL_105,Telegram,Нативная,2025-01-01
+CMP_0059,CL_060,Google,Поиск,2025-01-01
+CMP_0060,CL_054,Telegram,Telegram Ads,2025-01-01
+CMP_0061,CL_102,VK,VK Клипы,2025-01-01
+CMP_0062,CL_147,VK,Тизерная,2025-01-01
+CMP_0063,CL_080,VK,VK Клипы,2025-01-01
+CMP_0064,CL_066,VK,Тизерная,2025-01-01
+CMP_0065,CL_114,VK,Таргетированная,2025-01-01
+CMP_0066,CL_165,Telegram,Нативная,2025-01-01
+CMP_0067,CL_199,Telegram,Telegram Ads,2025-01-01
+CMP_0068,CL_076,Telegram,Telegram Ads,2025-01-01
+CMP_0069,CL_134,Telegram,Telegram Ads,2025-01-01
+CMP_0070,CL_102,Yandex,Сетевая,2025-01-01
+CMP_0071,CL_167,Telegram,Telegram Ads,2025-01-01
+CMP_0072,CL_133,VK,VK Клипы,2025-01-01
+CMP_0073,CL_067,Google,YouTube Video,2025-01-01
+CMP_0074,CL_047,Google,YouTube Video,2025-01-01
+CMP_0075,CL_136,Telegram,Telegram Ads,2025-01-01
+CMP_0076,CL_192,Google,Сетевая,2025-01-01
+CMP_0077,CL_192,VK,VK Клипы,2025-01-01
+CMP_0078,CL_026,Telegram,Telegram Ads,2025-01-01
+CMP_0079,CL_042,Yandex,Поиск,2025-01-01
+CMP_0080,CL_091,Yandex,Медийная,2025-01-01
+CMP_0081,CL_143,Google,Поиск,2025-01-01
+CMP_0082,CL_157,Google,YouTube Video,2025-01-01
+CMP_0083,CL_016,Google,Поиск,2025-01-01
+CMP_0084,CL_162,Yandex,Медийная,2025-01-01
+CMP_0085,CL_193,Google,YouTube Video,2025-01-01
+CMP_0086,CL_072,Yandex,Сетевая,2025-01-01
+CMP_0087,CL_127,Yandex,Поиск,2025-01-01
+CMP_0088,CL_177,Google,Сетевая,2025-01-01
+CMP_0089,CL_165,VK,Таргетированная,2025-01-01
+CMP_0090,CL_024,Google,YouTube Video,2025-01-01
+CMP_0091,CL_048,VK,VK Клипы,2025-01-01
+CMP_0092,CL_008,VK,Таргетированная,2025-01-01
+CMP_0093,CL_153,Yandex,Медийная,2025-01-01
+CMP_0094,CL_032,Telegram,Telegram Ads,2025-01-01
+CMP_0095,CL_013,VK,VK Клипы,2025-01-01
+CMP_0096,CL_192,Yandex,Ретаргетинг,2025-01-01
+CMP_0097,CL_142,Google,Поиск,2025-01-01
+CMP_0098,CL_182,VK,Тизерная,2025-01-01
+CMP_0099,CL_117,Telegram,Нативная,2025-01-01
+CMP_0100,CL_114,Yandex,Поиск,2025-01-01
+CMP_0101,CL_185,VK,Тизерная,2025-01-01
+CMP_0102,CL_013,Yandex,Поиск,2025-01-01
+CMP_0103,CL_184,Google,Поиск,2025-01-01
+CMP_0104,CL_042,Google,Сетевая,2025-01-01
+CMP_0105,CL_152,Telegram,Telegram Ads,2025-01-01
+CMP_0106,CL_089,Telegram,Нативная,2025-01-01
+CMP_0107,CL_108,Telegram,Нативная,2025-01-01
+CMP_0108,CL_188,Telegram,Нативная,2025-01-01
+CMP_0109,CL_120,VK,Тизерная,2025-01-01
+CMP_0110,CL_058,VK,Таргетированная,2025-01-01
+CMP_0111,CL_061,Yandex,Сетевая,2025-01-01
+CMP_0112,CL_129,Google,Сетевая,2025-01-01
+CMP_0113,CL_083,VK,Таргетированная,2025-01-01
+CMP_0114,CL_011,VK,VK Клипы,2025-01-01
+CMP_0115,CL_061,VK,Таргетированная,2025-01-01
+CMP_0116,CL_177,Telegram,Telegram Ads,2025-01-01
+CMP_0117,CL_150,Google,Поиск,2025-01-01
+CMP_0118,CL_160,Telegram,Нативная,2025-01-01
+CMP_0119,CL_087,Telegram,Telegram Ads,2025-01-01
+CMP_0120,CL_068,Google,YouTube Video,2025-01-01
+CMP_0121,CL_189,VK,VK Клипы,2025-01-01
+CMP_0122,CL_188,Telegram,Нативная,2025-01-01
+CMP_0123,CL_037,Telegram,Telegram Ads,2025-01-01
+CMP_0124,CL_018,VK,Таргетированная,2025-01-01
+CMP_0125,CL_113,VK,Таргетированная,2025-01-01
+CMP_0126,CL_183,Yandex,Медийная,2025-01-01
+CMP_0127,CL_173,VK,Тизерная,2025-01-01
+CMP_0128,CL_198,Telegram,Telegram Ads,2025-01-01
+CMP_0129,CL_184,Telegram,Нативная,2025-01-01
+CMP_0130,CL_195,Yandex,Медийная,2025-01-01
+CMP_0131,CL_200,Telegram,Нативная,2025-01-01
+CMP_0132,CL_060,Telegram,Telegram Ads,2025-01-01
+CMP_0133,CL_082,Google,Поиск,2025-01-01
+CMP_0134,CL_017,Google,Поиск,2025-01-01
+CMP_0135,CL_064,VK,VK Клипы,2025-01-01
+CMP_0136,CL_181,Telegram,Telegram Ads,2025-01-01
+CMP_0137,CL_151,Yandex,Поиск,2025-01-01
+CMP_0138,CL_084,Yandex,Ретаргетинг,2025-01-01
+CMP_0139,CL_127,Telegram,Telegram Ads,2025-01-01
+CMP_0140,CL_121,Yandex,Медийная,2025-01-01
+CMP_0141,CL_185,Telegram,Нативная,2025-01-01
+CMP_0142,CL_192,VK,Тизерная,2025-01-01
+CMP_0143,CL_092,Google,Поиск,2025-01-01
+CMP_0144,CL_031,Yandex,Ретаргетинг,2025-01-01
+CMP_0145,CL_193,Google,Поиск,2025-01-01
+CMP_0146,CL_075,Telegram,Нативная,2025-01-01
+CMP_0147,CL_179,Yandex,Поиск,2025-01-01
+CMP_0148,CL_028,Telegram,Telegram Ads,2025-01-01
+CMP_0149,CL_194,Yandex,Медийная,2025-01-01
+CMP_0150,CL_020,Yandex,Сетевая,2025-01-01
+CMP_0151,CL_115,Google,YouTube Video,2025-01-01
+CMP_0152,CL_006,Telegram,Telegram Ads,2025-01-01
+CMP_0153,CL_076,Google,Сетевая,2025-01-01
+CMP_0154,CL_076,VK,Таргетированная,2025-01-01
+CMP_0155,CL_041,Yandex,Поиск,2025-01-01
+CMP_0156,CL_183,VK,Таргетированная,2025-01-01
+CMP_0157,CL_098,Google,Сетевая,2025-01-01
+CMP_0158,CL_002,Telegram,Нативная,2025-01-01
+CMP_0159,CL_026,VK,Таргетированная,2025-01-01
+CMP_0160,CL_186,Google,YouTube Video,2025-01-01
+CMP_0161,CL_016,Yandex,Поиск,2025-01-01
+CMP_0162,CL_084,Google,Сетевая,2025-01-01
+CMP_0163,CL_192,VK,VK Клипы,2025-01-01
+CMP_0164,CL_067,Telegram,Нативная,2025-01-01
+CMP_0165,CL_091,VK,VK Клипы,2025-01-01
+CMP_0166,CL_150,VK,Таргетированная,2025-01-01
+CMP_0167,CL_198,Yandex,Медийная,2025-01-01
+CMP_0168,CL_145,Telegram,Нативная,2025-01-01
+CMP_0169,CL_030,Yandex,Медийная,2025-01-01
+CMP_0170,CL_020,Google,Поиск,2025-01-01
+CMP_0171,CL_119,Yandex,Сетевая,2025-01-01
+CMP_0172,CL_141,VK,VK Клипы,2025-01-01
+CMP_0173,CL_168,Telegram,Нативная,2025-01-01
+CMP_0174,CL_081,Telegram,Telegram Ads,2025-01-01
+CMP_0175,CL_142,Google,Поиск,2025-01-01
+CMP_0176,CL_142,Telegram,Telegram Ads,2025-01-01
+CMP_0177,CL_045,VK,Таргетированная,2025-01-01
+CMP_0178,CL_066,Telegram,Нативная,2025-01-01
+CMP_0179,CL_009,Yandex,Ретаргетинг,2025-01-01
+CMP_0180,CL_086,Telegram,Telegram Ads,2025-01-01
+CMP_0181,CL_051,VK,Тизерная,2025-01-01
+CMP_0182,CL_200,VK,Таргетированная,2025-01-01
+CMP_0183,CL_116,VK,Тизерная,2025-01-01
+CMP_0184,CL_001,Yandex,Сетевая,2025-01-01
+CMP_0185,CL_144,VK,Тизерная,2025-01-01
+CMP_0186,CL_097,Yandex,Поиск,2025-01-01
+CMP_0187,CL_072,Google,Сетевая,2025-01-01
+CMP_0188,CL_086,Yandex,Сетевая,2025-01-01
+CMP_0189,CL_157,VK,Тизерная,2025-01-01
+CMP_0190,CL_122,VK,VK Клипы,2025-01-01
+CMP_0191,CL_056,Google,YouTube Video,2025-01-01
+CMP_0192,CL_004,VK,Таргетированная,2025-01-01
+CMP_0193,CL_177,Telegram,Telegram Ads,2025-01-01
+CMP_0194,CL_059,Google,YouTube Video,2025-01-01
+CMP_0195,CL_047,Telegram,Telegram Ads,2025-01-01
+CMP_0196,CL_128,VK,Таргетированная,2025-01-01
+CMP_0197,CL_149,Telegram,Telegram Ads,2025-01-01
+CMP_0198,CL_049,Telegram,Telegram Ads,2025-01-01
+CMP_0199,CL_096,Telegram,Нативная,2025-01-01
+CMP_0200,CL_007,Yandex,Сетевая,2025-01-01
+CMP_0201,CL_050,Google,Сетевая,2025-01-01
+CMP_0202,CL_063,Telegram,Telegram Ads,2025-01-01
+CMP_0203,CL_153,Yandex,Сетевая,2025-01-01
+CMP_0204,CL_047,Google,Сетевая,2025-01-01
+CMP_0205,CL_048,Telegram,Telegram Ads,2025-01-01
+CMP_0206,CL_016,Google,Поиск,2025-01-01
+CMP_0207,CL_075,Yandex,Сетевая,2025-01-01
+CMP_0208,CL_046,Telegram,Telegram Ads,2025-01-01
+CMP_0209,CL_042,Telegram,Нативная,2025-01-01
+CMP_0210,CL_196,Google,YouTube Video,2025-01-01
+CMP_0211,CL_063,VK,Таргетированная,2025-01-01
+CMP_0212,CL_068,VK,Таргетированная,2025-01-01
+CMP_0213,CL_086,Telegram,Telegram Ads,2025-01-01
+CMP_0214,CL_029,Google,Поиск,2025-01-01
+CMP_0215,CL_039,Telegram,Telegram Ads,2025-01-01
+CMP_0216,CL_066,Yandex,Поиск,2025-01-01
+CMP_0217,CL_062,Google,Поиск,2025-01-01
+CMP_0218,CL_115,Google,Сетевая,2025-01-01
+CMP_0219,CL_135,VK,Таргетированная,2025-01-01
+CMP_0220,CL_087,Telegram,Нативная,2025-01-01
+CMP_0221,CL_045,VK,Таргетированная,2025-01-01
+CMP_0222,CL_126,Google,YouTube Video,2025-01-01
+CMP_0223,CL_093,VK,Таргетированная,2025-01-01
+CMP_0224,CL_105,Telegram,Telegram Ads,2025-01-01
+CMP_0225,CL_178,Telegram,Telegram Ads,2025-01-01
+CMP_0226,CL_009,Yandex,Поиск,2025-01-01
+CMP_0227,CL_189,VK,Тизерная,2025-01-01
+CMP_0228,CL_031,Telegram,Telegram Ads,2025-01-01
+CMP_0229,CL_103,Telegram,Нативная,2025-01-01
+CMP_0230,CL_112,Google,YouTube Video,2025-01-01
+CMP_0231,CL_183,Yandex,Ретаргетинг,2025-01-01
+CMP_0232,CL_194,Yandex,Медийная,2025-01-01
+CMP_0233,CL_073,Yandex,Медийная,2025-01-01
+CMP_0234,CL_069,Yandex,Поиск,2025-01-01
+CMP_0235,CL_135,Telegram,Нативная,2025-01-01
+CMP_0236,CL_036,Yandex,Ретаргетинг,2025-01-01
+CMP_0237,CL_040,Telegram,Telegram Ads,2025-01-01
+CMP_0238,CL_101,Yandex,Поиск,2025-01-01
+CMP_0239,CL_043,Google,Поиск,2025-01-01
+CMP_0240,CL_036,Telegram,Нативная,2025-01-01
+CMP_0241,CL_099,VK,Таргетированная,2025-01-01
+CMP_0242,CL_192,Google,Поиск,2025-01-01
+CMP_0243,CL_108,VK,VK Клипы,2025-01-01
+CMP_0244,CL_056,Google,Сетевая,2025-01-01
+CMP_0245,CL_084,Yandex,Медийная,2025-01-01
+CMP_0246,CL_093,Google,Сетевая,2025-01-01
+CMP_0247,CL_019,VK,Тизерная,2025-01-01
+CMP_0248,CL_011,Yandex,Медийная,2025-01-01
+CMP_0249,CL_011,Yandex,Медийная,2025-01-01
+CMP_0250,CL_107,VK,VK Клипы,2025-01-01
+CMP_0251,CL_157,VK,Тизерная,2025-01-01
+CMP_0252,CL_141,Yandex,Медийная,2025-01-01
+CMP_0253,CL_146,VK,VK Клипы,2025-01-01
+CMP_0254,CL_045,Telegram,Telegram Ads,2025-01-01
+CMP_0255,CL_140,Telegram,Нативная,2025-01-01
+CMP_0256,CL_168,Telegram,Telegram Ads,2025-01-01
+CMP_0257,CL_022,Google,YouTube Video,2025-01-01
+CMP_0258,CL_146,VK,Таргетированная,2025-01-01
+CMP_0259,CL_095,Telegram,Telegram Ads,2025-01-01
+CMP_0260,CL_119,VK,Тизерная,2025-01-01
+CMP_0261,CL_176,Telegram,Telegram Ads,2025-01-01
+CMP_0262,CL_068,Yandex,Поиск,2025-01-01
+CMP_0263,CL_162,VK,Таргетированная,2025-01-01
+CMP_0264,CL_040,Yandex,Сетевая,2025-01-01
+CMP_0265,CL_008,Yandex,Ретаргетинг,2025-01-01
+CMP_0266,CL_094,VK,Таргетированная,2025-01-01
+CMP_0267,CL_091,Google,YouTube Video,2025-01-01
+CMP_0268,CL_066,Telegram,Telegram Ads,2025-01-01
+CMP_0269,CL_026,Telegram,Telegram Ads,2025-01-01
+CMP_0270,CL_131,Google,Сетевая,2025-01-01
+CMP_0271,CL_096,Google,YouTube Video,2025-01-01
+CMP_0272,CL_033,Google,Поиск,2025-01-01
+CMP_0273,CL_055,Google,YouTube Video,2025-01-01
+CMP_0274,CL_084,Google,Сетевая,2025-01-01
+CMP_0275,CL_120,Yandex,Поиск,2025-01-01
+CMP_0276,CL_123,VK,VK Клипы,2025-01-01
+CMP_0277,CL_022,VK,Таргетированная,2025-01-01
+CMP_0278,CL_124,VK,Тизерная,2025-01-01
+CMP_0279,CL_185,Yandex,Ретаргетинг,2025-01-01
+CMP_0280,CL_083,Google,YouTube Video,2025-01-01
+CMP_0281,CL_075,Google,Поиск,2025-01-01
+CMP_0282,CL_173,Google,YouTube Video,2025-01-01
+CMP_0283,CL_072,VK,Тизерная,2025-01-01
+CMP_0284,CL_181,Google,YouTube Video,2025-01-01
+CMP_0285,CL_050,Telegram,Telegram Ads,2025-01-01
+CMP_0286,CL_185,Yandex,Поиск,2025-01-01
+CMP_0287,CL_001,Google,YouTube Video,2025-01-01
+CMP_0288,CL_074,Yandex,Ретаргетинг,2025-01-01
+CMP_0289,CL_149,Yandex,Ретаргетинг,2025-01-01
+CMP_0290,CL_175,Google,Сетевая,2025-01-01
+CMP_0291,CL_044,Yandex,Медийная,2025-01-01
+CMP_0292,CL_128,Telegram,Нативная,2025-01-01
+CMP_0293,CL_025,Google,YouTube Video,2025-01-01
+CMP_0294,CL_099,VK,VK Клипы,2025-01-01
+CMP_0295,CL_093,Yandex,Поиск,2025-01-01
+CMP_0296,CL_013,Yandex,Медийная,2025-01-01
+CMP_0297,CL_185,Telegram,Telegram Ads,2025-01-01
+CMP_0298,CL_043,VK,Таргетированная,2025-01-01
+CMP_0299,CL_010,VK,VK Клипы,2025-01-01
+CMP_0300,CL_039,Yandex,Ретаргетинг,2025-01-01
+CMP_0301,CL_076,Google,Поиск,2025-01-01
+CMP_0302,CL_179,Google,YouTube Video,2025-01-01
+CMP_0303,CL_016,Yandex,Поиск,2025-01-01
+CMP_0304,CL_192,Telegram,Telegram Ads,2025-01-01
+CMP_0305,CL_135,VK,Таргетированная,2025-01-01
+CMP_0306,CL_045,VK,Тизерная,2025-01-01
+CMP_0307,CL_132,Telegram,Нативная,2025-01-01
+CMP_0308,CL_134,Telegram,Telegram Ads,2025-01-01
+CMP_0309,CL_005,VK,Тизерная,2025-01-01
+CMP_0310,CL_011,Google,YouTube Video,2025-01-01
+CMP_0311,CL_157,VK,Тизерная,2025-01-01
+CMP_0312,CL_068,VK,Тизерная,2025-01-01
+CMP_0313,CL_105,Yandex,Медийная,2025-01-01
+CMP_0314,CL_197,Google,Поиск,2025-01-01
+CMP_0315,CL_046,Yandex,Ретаргетинг,2025-01-01
+CMP_0316,CL_127,Yandex,Ретаргетинг,2025-01-01
+CMP_0317,CL_050,Yandex,Сетевая,2025-01-01
+CMP_0318,CL_010,Google,Поиск,2025-01-01
+CMP_0319,CL_193,Yandex,Ретаргетинг,2025-01-01
+CMP_0320,CL_133,VK,Тизерная,2025-01-01
+CMP_0321,CL_079,Yandex,Медийная,2025-01-01
+CMP_0322,CL_105,Yandex,Поиск,2025-01-01
+CMP_0323,CL_100,Telegram,Telegram Ads,2025-01-01
+CMP_0324,CL_104,Google,YouTube Video,2025-01-01
+CMP_0325,CL_137,Telegram,Нативная,2025-01-01
+CMP_0326,CL_149,VK,Таргетированная,2025-01-01
+CMP_0327,CL_152,Google,Поиск,2025-01-01
+CMP_0328,CL_028,Telegram,Telegram Ads,2025-01-01
+CMP_0329,CL_138,VK,VK Клипы,2025-01-01
+CMP_0330,CL_023,Telegram,Telegram Ads,2025-01-01
+CMP_0331,CL_086,Telegram,Telegram Ads,2025-01-01
+CMP_0332,CL_148,Yandex,Сетевая,2025-01-01
+CMP_0333,CL_153,Google,Сетевая,2025-01-01
+CMP_0334,CL_132,Google,Поиск,2025-01-01
+CMP_0335,CL_182,Google,YouTube Video,2025-01-01
+CMP_0336,CL_096,Telegram,Нативная,2025-01-01
+CMP_0337,CL_094,Telegram,Нативная,2025-01-01
+CMP_0338,CL_099,Yandex,Сетевая,2025-01-01
+CMP_0339,CL_129,Telegram,Нативная,2025-01-01
+CMP_0340,CL_066,Yandex,Сетевая,2025-01-01
+CMP_0341,CL_196,VK,Таргетированная,2025-01-01
+CMP_0342,CL_170,Yandex,Медийная,2025-01-01
+CMP_0343,CL_150,Google,Поиск,2025-01-01
+CMP_0344,CL_164,Telegram,Нативная,2025-01-01
+CMP_0345,CL_163,VK,Таргетированная,2025-01-01
+CMP_0346,CL_171,Google,Сетевая,2025-01-01
+CMP_0347,CL_100,Google,Поиск,2025-01-01
+CMP_0348,CL_172,Google,Поиск,2025-01-01
+CMP_0349,CL_026,VK,Тизерная,2025-01-01
+CMP_0350,CL_134,Yandex,Медийная,2025-01-01
+CMP_0351,CL_132,Telegram,Нативная,2025-01-01
+CMP_0352,CL_088,VK,Тизерная,2025-01-01
+CMP_0353,CL_005,Yandex,Сетевая,2025-01-01
+CMP_0354,CL_101,Yandex,Поиск,2025-01-01
+CMP_0355,CL_094,VK,Таргетированная,2025-01-01
+CMP_0356,CL_127,VK,Таргетированная,2025-01-01
+CMP_0357,CL_128,Google,YouTube Video,2025-01-01
+CMP_0358,CL_062,Google,YouTube Video,2025-01-01
+CMP_0359,CL_133,VK,VK Клипы,2025-01-01
+CMP_0360,CL_036,VK,Таргетированная,2025-01-01
+CMP_0361,CL_122,Google,Поиск,2025-01-01
+CMP_0362,CL_062,Telegram,Нативная,2025-01-01
+CMP_0363,CL_166,Google,Поиск,2025-01-01
+CMP_0364,CL_148,Yandex,Медийная,2025-01-01
+CMP_0365,CL_110,Yandex,Сетевая,2025-01-01
+CMP_0366,CL_099,VK,VK Клипы,2025-01-01
+CMP_0367,CL_131,Google,YouTube Video,2025-01-01
+CMP_0368,CL_054,VK,Тизерная,2025-01-01
+CMP_0369,CL_016,Yandex,Сетевая,2025-01-01
+CMP_0370,CL_056,Google,Сетевая,2025-01-01
+CMP_0371,CL_080,Telegram,Telegram Ads,2025-01-01
+CMP_0372,CL_051,Google,YouTube Video,2025-01-01
+CMP_0373,CL_187,VK,Таргетированная,2025-01-01
+CMP_0374,CL_071,Telegram,Нативная,2025-01-01
+CMP_0375,CL_167,Google,YouTube Video,2025-01-01
+CMP_0376,CL_183,Yandex,Сетевая,2025-01-01
+CMP_0377,CL_020,VK,Таргетированная,2025-01-01
+CMP_0378,CL_144,Yandex,Сетевая,2025-01-01
+CMP_0379,CL_121,Google,YouTube Video,2025-01-01
+CMP_0380,CL_143,Google,Поиск,2025-01-01
+CMP_0381,CL_033,VK,VK Клипы,2025-01-01
+CMP_0382,CL_031,VK,Тизерная,2025-01-01
+CMP_0383,CL_033,Google,Сетевая,2025-01-01
+CMP_0384,CL_099,VK,VK Клипы,2025-01-01
+CMP_0385,CL_038,Telegram,Telegram Ads,2025-01-01
+CMP_0386,CL_089,Google,Сетевая,2025-01-01
+CMP_0387,CL_185,Telegram,Нативная,2025-01-01
+CMP_0388,CL_043,VK,Тизерная,2025-01-01
+CMP_0389,CL_182,Yandex,Медийная,2025-01-01
+CMP_0390,CL_007,Yandex,Поиск,2025-01-01
+CMP_0391,CL_142,Yandex,Медийная,2025-01-01
+CMP_0392,CL_096,Yandex,Сетевая,2025-01-01
+CMP_0393,CL_151,Google,Поиск,2025-01-01
+CMP_0394,CL_175,Google,Поиск,2025-01-01
+CMP_0395,CL_147,VK,Тизерная,2025-01-01
+CMP_0396,CL_031,Google,YouTube Video,2025-01-01
+CMP_0397,CL_149,Telegram,Telegram Ads,2025-01-01
+CMP_0398,CL_179,Google,Сетевая,2025-01-01
+CMP_0399,CL_191,Telegram,Telegram Ads,2025-01-01
+CMP_0400,CL_076,VK,Тизерная,2025-01-01
+CMP_0401,CL_041,Yandex,Медийная,2025-01-01
+CMP_0402,CL_162,Yandex,Ретаргетинг,2025-01-01
+CMP_0403,CL_155,VK,Тизерная,2025-01-01
+CMP_0404,CL_172,Yandex,Поиск,2025-01-01
+CMP_0405,CL_075,Yandex,Поиск,2025-01-01
+CMP_0406,CL_018,Telegram,Telegram Ads,2025-01-01
+CMP_0407,CL_074,VK,Тизерная,2025-01-01
+CMP_0408,CL_019,Google,YouTube Video,2025-01-01
+CMP_0409,CL_188,Telegram,Telegram Ads,2025-01-01
+CMP_0410,CL_091,Telegram,Telegram Ads,2025-01-01
+CMP_0411,CL_178,Google,YouTube Video,2025-01-01
+CMP_0412,CL_117,Yandex,Поиск,2025-01-01
+CMP_0413,CL_200,VK,Таргетированная,2025-01-01
+CMP_0414,CL_026,VK,Таргетированная,2025-01-01
+CMP_0415,CL_106,VK,VK Клипы,2025-01-01
+CMP_0416,CL_188,Google,Поиск,2025-01-01
+CMP_0417,CL_067,Yandex,Поиск,2025-01-01
+CMP_0418,CL_031,Telegram,Нативная,2025-01-01
+CMP_0419,CL_106,Google,Сетевая,2025-01-01
+CMP_0420,CL_177,Yandex,Медийная,2025-01-01
+CMP_0421,CL_196,VK,Тизерная,2025-01-01
+CMP_0422,CL_164,VK,VK Клипы,2025-01-01
+CMP_0423,CL_019,Telegram,Telegram Ads,2025-01-01
+CMP_0424,CL_086,VK,VK Клипы,2025-01-01
+CMP_0425,CL_192,VK,VK Клипы,2025-01-01
+CMP_0426,CL_102,Yandex,Ретаргетинг,2025-01-01
+CMP_0427,CL_195,VK,Тизерная,2025-01-01
+CMP_0428,CL_048,Google,Поиск,2025-01-01
+CMP_0429,CL_072,Telegram,Нативная,2025-01-01
+CMP_0430,CL_133,VK,Тизерная,2025-01-01
+CMP_0431,CL_138,Telegram,Нативная,2025-01-01
+CMP_0432,CL_128,Telegram,Telegram Ads,2025-01-01
+CMP_0433,CL_182,Google,Поиск,2025-01-01
+CMP_0434,CL_178,Yandex,Медийная,2025-01-01
+CMP_0435,CL_025,Telegram,Нативная,2025-01-01
+CMP_0436,CL_116,Google,Сетевая,2025-01-01
+CMP_0437,CL_006,Telegram,Telegram Ads,2025-01-01
+CMP_0438,CL_050,Google,YouTube Video,2025-01-01
+CMP_0439,CL_065,Yandex,Сетевая,2025-01-01
+CMP_0440,CL_080,VK,Тизерная,2025-01-01
+CMP_0441,CL_103,Yandex,Сетевая,2025-01-01
+CMP_0442,CL_085,Yandex,Ретаргетинг,2025-01-01
+CMP_0443,CL_063,Telegram,Telegram Ads,2025-01-01
+CMP_0444,CL_060,Yandex,Поиск,2025-01-01
+CMP_0445,CL_187,Google,Поиск,2025-01-01
+CMP_0446,CL_075,Yandex,Сетевая,2025-01-01
+CMP_0447,CL_164,Google,YouTube Video,2025-01-01
+CMP_0448,CL_146,VK,VK Клипы,2025-01-01
+CMP_0449,CL_079,Telegram,Telegram Ads,2025-01-01
+CMP_0450,CL_020,Telegram,Telegram Ads,2025-01-01
+CMP_0451,CL_093,Google,Сетевая,2025-01-01
+CMP_0452,CL_067,Google,YouTube Video,2025-01-01
+CMP_0453,CL_069,Telegram,Telegram Ads,2025-01-01
+CMP_0454,CL_129,Yandex,Сетевая,2025-01-01
+CMP_0455,CL_020,Yandex,Сетевая,2025-01-01
+CMP_0456,CL_036,VK,Тизерная,2025-01-01
+CMP_0457,CL_148,Telegram,Telegram Ads,2025-01-01
+CMP_0458,CL_105,VK,Тизерная,2025-01-01
+CMP_0459,CL_007,Telegram,Нативная,2025-01-01
+CMP_0460,CL_080,Telegram,Нативная,2025-01-01
+CMP_0461,CL_009,Telegram,Нативная,2025-01-01
+CMP_0462,CL_143,Yandex,Поиск,2025-01-01
+CMP_0463,CL_064,VK,VK Клипы,2025-01-01
+CMP_0464,CL_094,Yandex,Поиск,2025-01-01
+CMP_0465,CL_153,Google,Поиск,2025-01-01
+CMP_0466,CL_130,Yandex,Сетевая,2025-01-01
+CMP_0467,CL_087,VK,Тизерная,2025-01-01
+CMP_0468,CL_199,Telegram,Telegram Ads,2025-01-01
+CMP_0469,CL_105,Telegram,Нативная,2025-01-01
+CMP_0470,CL_066,Google,Сетевая,2025-01-01
+CMP_0471,CL_180,Google,Сетевая,2025-01-01
+CMP_0472,CL_007,Google,Сетевая,2025-01-01
+CMP_0473,CL_134,VK,VK Клипы,2025-01-01
+CMP_0474,CL_029,VK,Тизерная,2025-01-01
+CMP_0475,CL_078,Yandex,Ретаргетинг,2025-01-01
+CMP_0476,CL_045,Google,Сетевая,2025-01-01
+CMP_0477,CL_196,VK,Таргетированная,2025-01-01
+CMP_0478,CL_090,Google,Поиск,2025-01-01
+CMP_0479,CL_089,Google,Сетевая,2025-01-01
+CMP_0480,CL_026,Telegram,Telegram Ads,2025-01-01
+CMP_0481,CL_004,VK,VK Клипы,2025-01-01
+CMP_0482,CL_164,Google,Сетевая,2025-01-01
+CMP_0483,CL_180,Yandex,Медийная,2025-01-01
+CMP_0484,CL_005,VK,Таргетированная,2025-01-01
+CMP_0485,CL_174,Yandex,Медийная,2025-01-01
+CMP_0486,CL_175,Yandex,Сетевая,2025-01-01
+CMP_0487,CL_043,VK,Тизерная,2025-01-01
+CMP_0488,CL_175,Yandex,Поиск,2025-01-01
+CMP_0489,CL_110,Yandex,Поиск,2025-01-01
+CMP_0490,CL_152,Google,Сетевая,2025-01-01
+CMP_0491,CL_090,Telegram,Нативная,2025-01-01
+CMP_0492,CL_048,Yandex,Сетевая,2025-01-01
+CMP_0493,CL_127,Yandex,Медийная,2025-01-01
+CMP_0494,CL_030,Yandex,Медийная,2025-01-01
+CMP_0495,CL_009,VK,Таргетированная,2025-01-01
+CMP_0496,CL_193,Telegram,Telegram Ads,2025-01-01
+CMP_0497,CL_194,VK,Тизерная,2025-01-01
+CMP_0498,CL_149,Yandex,Поиск,2025-01-01
+CMP_0499,CL_149,VK,VK Клипы,2025-01-01
+CMP_0500,CL_158,VK,VK Клипы,2025-01-01

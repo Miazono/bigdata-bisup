@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Airflow runtime
+airflow/logs/
+airflow/dags/__pycache__/
+airflow/dags/input/
+airflow/config/airflow.cfg
+
+# Env
+.env
+airflow/.env
+
+# Docker / volumes
+spark/spark-data/
+airflow/postgres-db-volume/
+airflow/dwh-db-volume/
+
+# IDE
+.vscode/
+.idea/
+.DS_Store

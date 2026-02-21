@@ -1,0 +1,48 @@
+version: '3'
+services:
+  master:
+    build: .  
+    image: custom-spark:3.5.1
+    container_name: spark-master
+    ports:
+      - "5080:8080"
+      - "7077:7077"
+      - "4040:4040"
+    command: >
+      /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
+      --host master
+      --port 7077
+      --webui-port 8080
+    environment:
+      SPARK_MASTER_HOST: master
+      SPARK_MASTER_PORT: 7077
+      SPARK_MASTER_WEBUI_PORT: 8080
+    volumes:
+      - ./spark-data:/opt/spark/data
+      - ./apps:/opt/spark/work-dir
+
+  worker:
+    image: custom-spark:3.5.1 
+    container_name: spark-worker
+    depends_on:
+      - master
+    command: >
+      /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker
+      spark://master:7077
+      --cores 1
+      --memory 2G
+      --webui-port 8081
+    ports:
+      - "8081:8081"
+    environment:
+      SPARK_WORKER_CORES: 1
+      SPARK_WORKER_MEMORY: 2G
+      SPARK_WORKER_PORT: 8881
+      SPARK_WORKER_WEBUI_PORT: 8081
+    volumes:
+      - ./spark-data:/opt/spark/data
+      - ./apps:/opt/spark/work-dir
+networks:
+  default:
+    name: shared-data-network
+    external: true
