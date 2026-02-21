@@ -7,9 +7,6 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 
-# ==========================================
-# CONFIGURATION
-# ==========================================
 class Config:
     DAG_ID = 'crm_report_daily'
     DB_CONN_ID = 'postgres_medianation'
@@ -36,9 +33,6 @@ class Config:
     TBL_DM_RELIABILITY = f"{SCHEMA_DM}.site_reliability"
     TBL_DM_FINANCE = f"{SCHEMA_DM}.agency_finance"
 
-# ==========================================
-# HELPER FUNCTIONS
-# ==========================================
 def get_postgres_engine():
     hook = PostgresHook(postgres_conn_id=Config.DB_CONN_ID)
     return hook.get_sqlalchemy_engine()
@@ -53,9 +47,6 @@ def read_csv_safe(filename):
         raise FileNotFoundError(f"File not found: {path}")
     return pd.read_csv(path)
 
-# ==========================================
-# TASKS LOGIC: STAGING
-# ==========================================
 def truncate_stg_tables():
     logger = logging.getLogger("airflow.task")
     tables = [
@@ -69,35 +60,28 @@ def truncate_stg_tables():
 def load_stg_csv(filename, table_name, **kwargs):
     logger = logging.getLogger("airflow.task")
     
-    # Обработка динамических имен файлов (с датой)
     execution_date = kwargs.get('ds')
     if '{date}' in filename:
         filename = filename.format(date=execution_date)
     
     df = read_csv_safe(filename)
     
-    # Все поля в STG - TEXT. Приводим типы
     df = df.astype(str)
     
     engine = get_postgres_engine()
-    # table_name split to schema + table for to_sql
+
     schema, table = table_name.split('.')
     
     df.to_sql(table, engine, schema=schema, if_exists='append', index=False)
     logger.info(f"Loaded {len(df)} rows into {table_name}")
 
-# ==========================================
-# TASKS LOGIC: DDS (DIMENSIONS)
-# ==========================================
 def load_dds_clients():
-    # 1. Помечаем удаленных (is_active = False)
     sql_deactivate = f"""
         UPDATE {Config.TBL_DDS_CLIENTS}
         SET is_active = FALSE
         WHERE id NOT IN (SELECT id FROM {Config.TBL_STG_CLIENTS});
     """
     
-    # 2. Вставляем новых или обновляем существующих (Upsert)
     sql_upsert = f"""
         INSERT INTO {Config.TBL_DDS_CLIENTS} (id, name, website, industry, manager, is_active)
         SELECT id, name, website, industry, manager, TRUE
@@ -114,15 +98,12 @@ def load_dds_clients():
     run_sql(sql_upsert)
 
 def load_dds_campaigns():
-    # 1. Deactivate
     sql_deactivate = f"""
         UPDATE {Config.TBL_DDS_CAMPAIGNS}
         SET is_active = FALSE
         WHERE id NOT IN (SELECT id FROM {Config.TBL_STG_CAMPAIGNS});
     """
     
-    # 2. Upsert
-    # Важно: Приводим start_date к типу DATE
     sql_upsert = f"""
         INSERT INTO {Config.TBL_DDS_CAMPAIGNS} (id, client_id, platform, type, start_date, is_active)
         SELECT 
@@ -141,22 +122,17 @@ def load_dds_campaigns():
     run_sql(sql_deactivate)
     run_sql(sql_upsert)
 
-# ==========================================
-# TASKS LOGIC: DDS (FACTS)
-# ==========================================
+
 def load_dds_facts(sql_delete, sql_insert, **kwargs):
     ds = kwargs.get('ds')
     
-    # 1. Удаляем данные за текущую дату, чтобы избежать дублей
     run_sql(sql_delete, params={'date': ds})
     
-    # 2. Вставляем новые
     run_sql(sql_insert, params={'date': ds})
 
 def load_fact_advertising(**kwargs):
     sql_del = f"DELETE FROM {Config.TBL_DDS_FACT_AD} WHERE report_date = %(date)s;"
     
-    # JOIN с dimensions для проверки целостности
     sql_ins = f"""
         INSERT INTO {Config.TBL_DDS_FACT_AD} 
         (report_date, campaign_id, impressions, clicks, cost, conversions)
@@ -191,21 +167,15 @@ def load_fact_site(**kwargs):
     """
     load_dds_facts(sql_del, sql_ins, **kwargs)
 
-# ==========================================
-# TASKS LOGIC: DATA MARTS
-# ==========================================
+
 def build_mart_daily(sql_tmpl, **kwargs):
     ds = kwargs.get('ds')
-    # Используем ON CONFLICT для идемпотентности
     run_sql(sql_tmpl, params={'date': ds})
 
 def build_mart_monthly(sql_delete, sql_insert, **kwargs):
     ds = kwargs.get('ds')
-    # Пересчет месяца
     run_sql(sql_delete, params={'date': ds})
     run_sql(sql_insert, params={'date': ds})
-
-# --- Mart Logic Wrappers ---
 
 def calc_dm_platform(**kwargs):
     sql = f"""
@@ -250,10 +220,8 @@ def calc_dm_reliability(**kwargs):
     build_mart_daily(sql, **kwargs)
 
 def calc_dm_kpi(**kwargs):
-    # Удаляем месяц
     sql_del = f"DELETE FROM {Config.TBL_DM_KPI} WHERE report_month = DATE_TRUNC('month', %(date)s::date);"
     
-    # Считаем месяц заново
     sql_ins = f"""
         INSERT INTO {Config.TBL_DM_KPI} (report_month, client_name, industry, total_spend, total_conversions, cpl)
         SELECT 
@@ -290,9 +258,6 @@ def calc_dm_finance(**kwargs):
     """
     build_mart_monthly(sql_del, sql_ins, **kwargs)
 
-# ==========================================
-# DAG DEFINITION
-# ==========================================
 default_args = {
     'owner': 'medianation',
     'start_date': datetime(2025, 1, 1),
@@ -336,7 +301,6 @@ with DAG(
         op_kwargs={'filename': 'site_monitoring_{date}.csv', 'table_name': Config.TBL_STG_MONITOR}
     )
 
-    # 3. Load DDS Dimensions (Sequential)
     t_dds_clients = PythonOperator(
         task_id='load_dds_clients',
         python_callable=load_dds_clients
@@ -347,7 +311,6 @@ with DAG(
         python_callable=load_dds_campaigns
     )
 
-    # 4. Load DDS Facts (Parallel)
     t_dds_ad_facts = PythonOperator(
         task_id='load_dds_ad_facts',
         python_callable=load_fact_advertising
@@ -358,7 +321,6 @@ with DAG(
         python_callable=load_fact_site
     )
 
-    # 5. Build Data Marts (Parallel)
     t_dm_kpi = PythonOperator(
         task_id='build_dm_kpi',
         python_callable=calc_dm_kpi

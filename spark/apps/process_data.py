@@ -19,7 +19,7 @@ def main():
     # Читаем из схемы RAW
     clients_df = spark.read.jdbc(
         url=jdbc_url,
-        table="raw.clients",  # Схема.Таблица
+        table="raw.clients",
         properties=connection_properties
     )
 
@@ -29,7 +29,6 @@ def main():
         properties=connection_properties
     )
 
-    print("Processing data...")
     
     joined_df = orders_df.join(
         clients_df,
@@ -44,9 +43,6 @@ def main():
         .orderBy(col("total_spent").desc())
 
     
-    # Пишем в схему MART
-    # mode("append") безопаснее, если таблица создана вручную с типами данных
-    # Если хотите перезаписывать целиком каждый раз: mode("overwrite") + option("truncate", "true")
     report_df.write.jdbc(
         url=jdbc_url,
         table="mart.client_spend_report",
