@@ -2,6 +2,7 @@ from airflow import DAG
 from common.constants import DBConnections, SparkConnections, Paths
 from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 from airflow.operators.python import PythonOperator
+from airflow.providers.apache.spark.hooks.spark_submit import SparkSubmitHook
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 from datetime import datetime
@@ -16,6 +17,27 @@ default_args = {
     'start_date': datetime(2024, 1, 1),
     'catchup': False,
 }
+
+
+_original_resolve_connection = SparkSubmitHook._resolve_connection
+
+
+def _resolve_connection_with_spark_master(self):
+    conn_data = _original_resolve_connection(self)
+    master = conn_data.get("master")
+
+    if not master or master.startswith(("spark://")):
+        return conn_data
+
+    conn = self.get_connection(self._conn_id)
+
+    if conn.host:
+        conn_data["master"] = f"spark://{conn.host}:{conn.port}"
+
+    return conn_data
+
+
+SparkSubmitHook._resolve_connection = _resolve_connection_with_spark_master
 
 def generate_mock_data():
     pg_hook = PostgresHook(postgres_conn_id=DB_CONN_ID)
@@ -97,6 +119,7 @@ with DAG('elt_pipeline', default_args=default_args, schedule=None) as dag:
         executor_cores='1',
         executor_memory='1g',
         driver_memory='1g',
+        deploy_mode='client',
         name='airflow_spark_job',
         verbose=True,
         conf={

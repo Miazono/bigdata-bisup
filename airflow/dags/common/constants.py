@@ -7,4 +7,4 @@ class SparkConnections:
 
 class Paths:
     SPARK_APPS = "/opt/spark/work-dir"
-    SPARK_JARS = "/opt/spark/jars"
+    SPARK_JARS = "/opt/spark/work-dir"

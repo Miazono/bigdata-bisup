@@ -6,7 +6,7 @@ def main():
         .appName("ClientOrdersReport") \
         .getOrCreate()
 
-    jdbc_url = "jdbc:postgresql://postgres:5432/dwh"
+    jdbc_url = "jdbc:postgresql://postgres:5432/airflow"
 
     connection_properties = {
         "user": "airflow", 
