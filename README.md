@@ -1,73 +1,61 @@
-# Практика Big Data
+# CRM DWH Demo
 
-Учебный проект по оркестрации DWH-пайплайна в Apache Airflow с загрузкой данных в PostgreSQL.
-В ветке `p2_demo` оставлена только практика с витринной моделью CRM-данных.
+README оставлен только с практической информацией:
+- как запустить стенд;
+- как подготовить raw-данные для DAG `crm_report_daily`.
 
-**Стек и компоненты**
-- Apache Airflow
-- PostgreSQL DWH
-- Grafana
+## Запуск
+Запуск стенда:
 
-**Архитектура и структура**
-- `airflow/` — DAG-и, SQL, init скрипты, `docker-compose.yaml`
-- `dataset/` — sample CSV
-- `data_generator.py` — генератор данных
-
-Связи: Airflow управляет задачами загрузки и преобразования, PostgreSQL хранит staging, DDS и витрины.
-
-**Практики**
-1. **Практика 2 — DAG `crm_report_daily`**
-   - STG → DDS → DM
-   - Загрузка CSV в staging
-   - Построение фактов и витрин
-
-Используемые схемы:
-- `stg`, `dds`, `dm`
-
-**DAGS**
-**Практика — CRM/DWH витрины маркетинга (crm_report_daily)**
-- Назначение: имитируем агентскую отчетность по клиентам, кампаниям и состоянию сайтов.
-- Входные файлы (CSV):
-  - `clients.csv`, `campaigns.csv` — справочники.
-  - `ad_stats_{date}.csv` — ежедневная статистика рекламы.
-  - `site_monitoring_{date}.csv` — ежедневный мониторинг сайтов.
-- Слои:
-  - STG: сырые CSV (все поля как `TEXT`).
-  - DDS: справочники клиентов/кампаний + факты рекламы и мониторинга.
-  - DM: витрины KPI и агрегации.
-- Логика витрин:
-  - `dm.client_kpi`: месячные расходы, конверсии и CPL по клиентам.
-  - `dm.platform_stats`: дневные CTR/CPC и клики по платформам.
-  - `dm.site_reliability`: дневная надежность сайтов и статус `OK/PROBLEM`.
-  - `dm.agency_finance`: месячная выручка и комиссия по менеджерам.
-
-**Быстрый старт**
-1. Требования: установлен `docker` и `docker compose`.
-2. Запуск Airflow:
 ```bash
 cd airflow
+./init.sh
 docker compose up -d --build
 ```
-3. Доступы к UI:
+
+После старта будут доступны:
 - Airflow: `http://localhost:8080`
 - Grafana: `http://localhost:3000`
 
-**Входные данные**
-- DAG `crm_report_daily` читает CSV из `airflow/dags/input/`.
-- В репозитории хранится только sample в `dataset/`.
-- Перед запуском скопируй sample в `airflow/dags/input/`:
+## Raw-данные
+
+DAG `crm_report_daily` читает CSV из каталога `airflow/dags/input/`.
+
+Обязательные файлы:
+- `clients.csv`
+- `campaigns.csv`
+- `ad_stats_YYYY-MM-DD.csv`
+- `site_monitoring_YYYY-MM-DD.csv`
+
+Важно:
+- дата в имени файлов `ad_stats_YYYY-MM-DD.csv` и `site_monitoring_YYYY-MM-DD.csv` должна совпадать с датой запуска DAG;
+- если запускать DAG за дату `2026-01-10`, в папке должны лежать `ad_stats_2026-01-10.csv` и `site_monitoring_2026-01-10.csv`.
+
+
+Пример генерации набора за `2026-01-10` сразу в папку, откуда их читает Airflow:
+
 ```bash
-cp -r ../dataset/* ./airflow/dags/input/
+mkdir -p airflow/dags/input
+python3 data_generator.py --date 2026-01-10 --output airflow/dags/input
 ```
 
-**Важные настройки**
-- Airflow connections задаются через env:
-  - `AIRFLOW_CONN_POSTGRES_MEDIANATION`
+Опциональные параметры генератора:
+- `--clients` — количество клиентов, по умолчанию `300`;
+- `--campaigns` — количество кампаний, по умолчанию `1230`;
+- `--output` — каталог для сохранения файлов, по умолчанию `dataset`.
 
-**FAQ / Troubleshooting**
-- DAG не видит CSV: проверь `airflow/dags/input/`.
-- Логи не отображаются: проверь health контейнеров `airflow-worker`, `airflow-triggerer`, `airflow-dag-processor`.
+Пример с изменением объема данных:
 
-**Проверка (manual)**
-- Поднять `airflow`.
-- Скопировать sample CSV и запустить `crm_report_daily`.
+```bash
+python3 data_generator.py \
+  --date 2026-01-10 \
+  --clients 500 \
+  --campaigns 2000 \
+  --output airflow/dags/input
+```
+
+## Запуск в Airflow
+
+1. Открыть UI Airflow: `http://localhost:8080`
+2. Найти DAG `crm_report_daily`
+3. Запустить его с датой, для которой подготовлены daily-файлы.
