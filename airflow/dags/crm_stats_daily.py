@@ -50,8 +50,10 @@ def read_csv_safe(filename):
 def truncate_stg_tables():
     logger = logging.getLogger("airflow.task")
     tables = [
-        Config.TBL_STG_CLIENTS, Config.TBL_STG_CAMPAIGNS, 
-        Config.TBL_STG_STATS, Config.TBL_STG_MONITOR
+        Config.TBL_STG_CLIENTS, 
+        Config.TBL_STG_CAMPAIGNS, 
+        Config.TBL_STG_STATS, 
+        Config.TBL_STG_MONITOR
     ]
     sql = f"TRUNCATE TABLE {', '.join(tables)};"
     run_sql(sql)
