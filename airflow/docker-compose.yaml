@@ -368,12 +368,15 @@ services:
     depends_on:
       - postgres-dwh
     restart: always
+    volumes:
+      - grafana-data:/var/lib/grafana
     networks:
       - default
 
 volumes:
   postgres-db-volume:
   dwh-db-volume:
+  grafana-data:
 
 networks:
   default:
