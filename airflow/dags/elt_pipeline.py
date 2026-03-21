@@ -40,7 +40,7 @@ def _resolve_connection_with_spark_master(self):
 SparkSubmitHook._resolve_connection = _resolve_connection_with_spark_master
 
 
-def generate_mock_data():
+def generate_raw_data():
     pg_hook = PostgresHook(postgres_conn_id=DB_CONN_ID)
 
     clients = [(f"Client_{i}", "2024-01-01") for i in range(1, 101)]
@@ -89,7 +89,7 @@ with DAG("elt_pipeline", default_args=default_args, schedule=None) as dag:
     )
 
     generate_data = PythonOperator(
-        task_id="generate_data", python_callable=generate_mock_data
+        task_id="generate_data", python_callable=generate_raw_data
     )
 
     process_spark = SparkSubmitOperator(

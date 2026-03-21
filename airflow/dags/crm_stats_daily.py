@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 from datetime import datetime, timedelta
-import logging
 
 from airflow import DAG
 from airflow.operators.python import PythonOperator
@@ -11,19 +10,18 @@ class Config:
     DAG_ID = 'crm_report_daily'
     DB_CONN_ID = 'postgres_medianation'
     INPUT_PATH = '/opt/airflow/dags/input'
-    
-    # Schemas
+
     SCHEMA_STG = 'stg'
     SCHEMA_DDS = 'dds'
     SCHEMA_DM = 'dm'
 
-    # Table Names
     TBL_STG_CLIENTS = f"{SCHEMA_STG}.clients"
     TBL_STG_CAMPAIGNS = f"{SCHEMA_STG}.campaigns"
     TBL_STG_STATS = f"{SCHEMA_STG}.ad_stats"
     TBL_STG_MONITOR = f"{SCHEMA_STG}.site_monitoring"
 
     TBL_DDS_CLIENTS = f"{SCHEMA_DDS}.clients"
+    TBL_DDS_SITES = f"{SCHEMA_DDS}.sites"
     TBL_DDS_CAMPAIGNS = f"{SCHEMA_DDS}.campaigns"
     TBL_DDS_FACT_AD = f"{SCHEMA_DDS}.fact_advertising"
     TBL_DDS_FACT_SITE = f"{SCHEMA_DDS}.fact_site_health"
@@ -48,7 +46,6 @@ def read_csv_safe(filename):
     return pd.read_csv(path)
 
 def truncate_stg_tables():
-    logger = logging.getLogger("airflow.task")
     tables = [
         Config.TBL_STG_CLIENTS, 
         Config.TBL_STG_CAMPAIGNS, 
@@ -57,11 +54,8 @@ def truncate_stg_tables():
     ]
     sql = f"TRUNCATE TABLE {', '.join(tables)};"
     run_sql(sql)
-    logger.info("STG tables truncated.")
 
-def load_stg_csv(filename, table_name, **kwargs):
-    logger = logging.getLogger("airflow.task")
-    
+def load_stg_csv(filename, table_name, **kwargs):    
     execution_date = kwargs.get('ds')
     if '{date}' in filename:
         filename = filename.format(date=execution_date)
@@ -75,7 +69,6 @@ def load_stg_csv(filename, table_name, **kwargs):
     schema, table = table_name.split('.')
     
     df.to_sql(table, engine, schema=schema, if_exists='append', index=False)
-    logger.info(f"Loaded {len(df)} rows into {table_name}")
 
 def load_dds_clients():
     sql_deactivate = f"""
@@ -85,14 +78,40 @@ def load_dds_clients():
     """
     
     sql_upsert = f"""
-        INSERT INTO {Config.TBL_DDS_CLIENTS} (id, name, website, industry, manager, is_active)
-        SELECT id, name, website, industry, manager, TRUE
+        INSERT INTO {Config.TBL_DDS_CLIENTS} (id, name, industry, manager, is_active)
+        SELECT id, name, industry, manager, TRUE
         FROM {Config.TBL_STG_CLIENTS}
         ON CONFLICT (id) DO UPDATE SET
             name = EXCLUDED.name,
-            website = EXCLUDED.website,
             industry = EXCLUDED.industry,
             manager = EXCLUDED.manager,
+            is_active = TRUE,
+            updated_at = NOW();
+    """
+    run_sql(sql_deactivate)
+    run_sql(sql_upsert)
+
+def load_dds_sites():
+    sql_deactivate = f"""
+        UPDATE {Config.TBL_DDS_SITES}
+        SET is_active = FALSE
+        WHERE site_id NOT IN (SELECT site_id FROM {Config.TBL_STG_CLIENTS});
+    """
+
+    sql_upsert = f"""
+        INSERT INTO {Config.TBL_DDS_SITES} (site_id, client_sk, site_name, site_url, is_active)
+        SELECT
+            stg.site_id,
+            d.client_sk,
+            stg.site_name,
+            stg.site_url,
+            TRUE
+        FROM {Config.TBL_STG_CLIENTS} stg
+        JOIN {Config.TBL_DDS_CLIENTS} d ON stg.id = d.id
+        ON CONFLICT (site_id) DO UPDATE SET
+            client_sk = EXCLUDED.client_sk,
+            site_name = EXCLUDED.site_name,
+            site_url = EXCLUDED.site_url,
             is_active = TRUE,
             updated_at = NOW();
     """
@@ -107,14 +126,18 @@ def load_dds_campaigns():
     """
     
     sql_upsert = f"""
-        INSERT INTO {Config.TBL_DDS_CAMPAIGNS} (id, client_id, platform, type, start_date, is_active)
+        INSERT INTO {Config.TBL_DDS_CAMPAIGNS} (id, client_sk, platform, type, start_date, is_active)
         SELECT 
-            id, client_id, platform, type, 
-            TO_DATE(start_date, 'YYYY-MM-DD'), 
+            stg.id,
+            d.client_sk,
+            stg.platform,
+            stg.type,
+            TO_DATE(stg.start_date, 'YYYY-MM-DD'),
             TRUE
-        FROM {Config.TBL_STG_CAMPAIGNS}
+        FROM {Config.TBL_STG_CAMPAIGNS} stg
+        JOIN {Config.TBL_DDS_CLIENTS} d ON stg.client_id = d.id
         ON CONFLICT (id) DO UPDATE SET
-            client_id = EXCLUDED.client_id,
+            client_sk = EXCLUDED.client_sk,
             platform = EXCLUDED.platform,
             type = EXCLUDED.type,
             start_date = EXCLUDED.start_date,
@@ -137,10 +160,10 @@ def load_fact_advertising(**kwargs):
     
     sql_ins = f"""
         INSERT INTO {Config.TBL_DDS_FACT_AD} 
-        (report_date, campaign_id, impressions, clicks, cost, conversions)
+        (report_date, campaign_sk, impressions, clicks, cost, conversions)
         SELECT 
             TO_DATE(stg.date, 'YYYY-MM-DD'),
-            stg.campaign_id,
+            d.campaign_sk,
             stg.impressions::INT,
             stg.clicks::INT,
             stg.cost::DECIMAL,
@@ -156,15 +179,15 @@ def load_fact_site(**kwargs):
     
     sql_ins = f"""
         INSERT INTO {Config.TBL_DDS_FACT_SITE}
-        (check_date, client_id, load_time_ms, uptime_pct, server_errors)
+        (check_date, site_sk, load_time_ms, uptime_pct, server_errors)
         SELECT 
             TO_DATE(stg.date, 'YYYY-MM-DD'),
-            stg.client_id,
+            d.site_sk,
             stg.load_time_ms::INT,
             stg.uptime_pct::DECIMAL,
             stg.server_errors::INT
         FROM {Config.TBL_STG_MONITOR} stg
-        JOIN {Config.TBL_DDS_CLIENTS} d ON stg.client_id = d.id
+        JOIN {Config.TBL_DDS_SITES} d ON stg.site_id = d.site_id
         WHERE stg.date = %(date)s;
     """
     load_dds_facts(sql_del, sql_ins, **kwargs)
@@ -189,7 +212,7 @@ def calc_dm_platform(**kwargs):
             AVG(f.cost / NULLIF(f.clicks, 0)) as cpc,
             SUM(f.clicks)
         FROM {Config.TBL_DDS_FACT_AD} f
-        JOIN {Config.TBL_DDS_CAMPAIGNS} c ON f.campaign_id = c.id
+        JOIN {Config.TBL_DDS_CAMPAIGNS} c ON f.campaign_sk = c.campaign_sk
         WHERE f.report_date = %(date)s
         GROUP BY 1, 2
         ON CONFLICT (report_date, platform) DO UPDATE SET
@@ -202,18 +225,24 @@ def calc_dm_platform(**kwargs):
 
 def calc_dm_reliability(**kwargs):
     sql = f"""
-        INSERT INTO {Config.TBL_DM_RELIABILITY} (report_date, website, avg_load_time, total_errors, status)
+        INSERT INTO {Config.TBL_DM_RELIABILITY} (report_date, site_sk, site_id, site_name, site_url, avg_load_time, total_errors, status)
         SELECT 
             f.check_date,
-            c.website,
+            s.site_sk,
+            s.site_id,
+            s.site_name,
+            s.site_url,
             AVG(f.load_time_ms)::INT,
             SUM(f.server_errors),
             CASE WHEN SUM(f.server_errors) > 0 THEN 'PROBLEM' ELSE 'OK' END
         FROM {Config.TBL_DDS_FACT_SITE} f
-        JOIN {Config.TBL_DDS_CLIENTS} c ON f.client_id = c.id
+        JOIN {Config.TBL_DDS_SITES} s ON f.site_sk = s.site_sk
         WHERE f.check_date = %(date)s
-        GROUP BY 1, 2
-        ON CONFLICT (report_date, website) DO UPDATE SET
+        GROUP BY 1, 2, 3, 4, 5
+        ON CONFLICT (report_date, site_sk) DO UPDATE SET
+            site_id = EXCLUDED.site_id,
+            site_name = EXCLUDED.site_name,
+            site_url = EXCLUDED.site_url,
             avg_load_time = EXCLUDED.avg_load_time,
             total_errors = EXCLUDED.total_errors,
             status = EXCLUDED.status,
@@ -225,19 +254,21 @@ def calc_dm_kpi(**kwargs):
     sql_del = f"DELETE FROM {Config.TBL_DM_KPI} WHERE report_month = DATE_TRUNC('month', %(date)s::date);"
     
     sql_ins = f"""
-        INSERT INTO {Config.TBL_DM_KPI} (report_month, client_name, industry, total_spend, total_conversions, cpl)
+        INSERT INTO {Config.TBL_DM_KPI} (report_month, client_sk, client_id, client_name, industry, total_spend, total_conversions, cpl)
         SELECT 
             DATE_TRUNC('month', f.report_date)::DATE,
+            c.client_sk,
+            c.id,
             c.name,
             c.industry,
             SUM(f.cost),
             SUM(f.conversions),
             SUM(f.cost) / NULLIF(SUM(f.conversions), 0)
         FROM {Config.TBL_DDS_FACT_AD} f
-        JOIN {Config.TBL_DDS_CAMPAIGNS} cmp ON f.campaign_id = cmp.id
-        JOIN {Config.TBL_DDS_CLIENTS} c ON cmp.client_id = c.id
+        JOIN {Config.TBL_DDS_CAMPAIGNS} cmp ON f.campaign_sk = cmp.campaign_sk
+        JOIN {Config.TBL_DDS_CLIENTS} c ON cmp.client_sk = c.client_sk
         WHERE DATE_TRUNC('month', f.report_date) = DATE_TRUNC('month', %(date)s::date)
-        GROUP BY 1, 2, 3;
+        GROUP BY 1, 2, 3, 4, 5;
     """
     build_mart_monthly(sql_del, sql_ins, **kwargs)
 
@@ -249,12 +280,12 @@ def calc_dm_finance(**kwargs):
         SELECT 
             DATE_TRUNC('month', f.report_date)::DATE,
             c.manager,
-            COUNT(DISTINCT c.id),
+            COUNT(DISTINCT c.client_sk),
             SUM(f.cost),
             SUM(f.cost) * 0.10
         FROM {Config.TBL_DDS_FACT_AD} f
-        JOIN {Config.TBL_DDS_CAMPAIGNS} cmp ON f.campaign_id = cmp.id
-        JOIN {Config.TBL_DDS_CLIENTS} c ON cmp.client_id = c.id
+        JOIN {Config.TBL_DDS_CAMPAIGNS} cmp ON f.campaign_sk = cmp.campaign_sk
+        JOIN {Config.TBL_DDS_CLIENTS} c ON cmp.client_sk = c.client_sk
         WHERE DATE_TRUNC('month', f.report_date) = DATE_TRUNC('month', %(date)s::date)
         GROUP BY 1, 2;
     """
@@ -307,6 +338,11 @@ with DAG(
         task_id='load_dds_clients',
         python_callable=load_dds_clients
     )
+
+    t_dds_sites = PythonOperator(
+        task_id='load_dds_sites',
+        python_callable=load_dds_sites
+    )
     
     t_dds_campaigns = PythonOperator(
         task_id='load_dds_campaigns',
@@ -348,10 +384,10 @@ with DAG(
     
     [t_stg_clients, t_stg_campaigns, t_stg_stats, t_stg_monitor] >> t_dds_clients
     
-    t_dds_clients >> t_dds_campaigns
+    t_dds_clients >> [t_dds_campaigns, t_dds_sites]
     
     t_dds_campaigns >> t_dds_ad_facts
-    t_dds_clients >> t_dds_site_facts
+    t_dds_sites >> t_dds_site_facts
     
     t_dds_ad_facts >> [t_dm_kpi, t_dm_platform, t_dm_finance]
     t_dds_site_facts >> t_dm_reliability
