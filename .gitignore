@@ -13,7 +13,6 @@ airflow/config/airflow.cfg
 airflow/.env
 
 # Docker / volumes
-spark/spark-data/
 airflow/postgres-db-volume/
 airflow/dwh-db-volume/
 

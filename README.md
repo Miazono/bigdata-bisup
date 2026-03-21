@@ -1,50 +1,31 @@
 # Практика Big Data
 
-Учебный проект по оркестрации ETL в Apache Airflow и трансформации данных в Apache Spark с загрузкой в DWH на PostgreSQL. 
-Содержит две практики: базовый ETL-пайплайн с обработкой Spark-ом и витринную модель CRM-данных.
+Учебный проект по оркестрации DWH-пайплайна в Apache Airflow с загрузкой данных в PostgreSQL.
+В ветке `p2_demo` оставлена только практика с витринной моделью CRM-данных.
 
 **Стек и компоненты**
 - Apache Airflow
-- Apache Spark
 - PostgreSQL DWH
 - Grafana
 
 **Архитектура и структура**
 - `airflow/` — DAG-и, SQL, init скрипты, `docker-compose.yaml`
-- `spark/` — Spark cluster + job
 - `dataset/` — sample CSV
 - `data_generator.py` — генератор данных
 
-Связи: Airflow управляет задачами, Spark выполняет трансформации и пишет в DWH, PostgreSQL хранит витрины.
+Связи: Airflow управляет задачами загрузки и преобразования, PostgreSQL хранит staging, DDS и витрины.
 
 **Практики**
-1. **Практика 1 — DAG `elt_pipeline`**
-   - Создание RAW и MART таблиц
-   - Генерация мок-данных
-   - Spark-трансформация
-   - Запись витрины в `mart`
-2. **Практика 2 — DAG `crm_report_daily`**
+1. **Практика 2 — DAG `crm_report_daily`**
    - STG → DDS → DM
    - Загрузка CSV в staging
    - Построение фактов и витрин
 
 Используемые схемы:
-- Практика 1: `raw`, `mart`
-- Практика 2: `stg`, `dds`, `dm`
+- `stg`, `dds`, `dm`
 
 **DAGS**
-**Практика 1 — ETL и витрина трат клиентов (elt_pipeline)**
-- Назначение: имитируем заказы клиентов и строит витрину трат по клиенту.
-- Данные:
-  - `raw.clients`: клиенты (100 записей) с датой регистрации.
-  - `raw.orders`: заказы (500 записей), суммы и даты.
-- Логика:
-  - В Airflow генерируются клиенты и заказы (mock).
-  - Spark читает `raw.*`, агрегирует `total_spent` по клиенту, добавляет `generated_at`.
-  - Результат пишется в `mart.client_spend_report`.
-- Итоговая витрина: рейтинг клиентов по суммарным тратам.
-
-**Практика 2 — CRM/DWH витрины маркетинга (crm_report_daily)**
+**Практика — CRM/DWH витрины маркетинга (crm_report_daily)**
 - Назначение: имитируем агентскую отчетность по клиентам, кампаниям и состоянию сайтов.
 - Входные файлы (CSV):
   - `clients.csv`, `campaigns.csv` — справочники.
@@ -67,15 +48,8 @@
 cd airflow
 docker compose up -d --build
 ```
-3. Запуск Spark:
-```bash
-cd ../spark
-docker compose up -d --build
-```
-4. Доступы к UI:
+3. Доступы к UI:
 - Airflow: `http://localhost:8080`
-- Spark Master UI: `http://localhost:5080`
-- Spark Worker UI: `http://localhost:8081`
 - Grafana: `http://localhost:3000`
 
 **Входные данные**
@@ -88,21 +62,12 @@ cp -r ../dataset/* ./airflow/dags/input/
 
 **Важные настройки**
 - Airflow connections задаются через env:
-  - `AIRFLOW_CONN_DWH_POSTGRES`
   - `AIRFLOW_CONN_POSTGRES_MEDIANATION`
-  - `AIRFLOW_CONN_SPARK_DEFAULT`
-- Spark использует внешнюю сеть `shared-data-network`.
-  Если сеть еще не создана:
-```bash
-docker network create shared-data-network
-```
 
 **FAQ / Troubleshooting**
 - DAG не видит CSV: проверь `airflow/dags/input/`.
-- Spark не подключается: проверь сеть `shared-data-network`.
 - Логи не отображаются: проверь health контейнеров `airflow-worker`, `airflow-triggerer`, `airflow-dag-processor`.
 
 **Проверка (manual)**
-- Поднять `airflow` и `spark`.
-- Запустить `elt_pipeline` и проверить витрину `mart`.
+- Поднять `airflow`.
 - Скопировать sample CSV и запустить `crm_report_daily`.
