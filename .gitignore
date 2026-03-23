@@ -14,6 +14,7 @@ airflow/.env
 airflow/postgres-db-volume/
 airflow/dwh-db-volume/
 
+docs
 spark
 .vscode/
 .idea/
